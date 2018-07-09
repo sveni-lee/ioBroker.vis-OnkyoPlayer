@@ -1,1 +1,187 @@
+<!--
+    ioBroker.vis players Widget-Set
+    version: "0.1.0"
+    Copyright 10.2016-2017 instalator<vvvalt@mail.ru>
+-->
+<link rel="stylesheet" href="widgets/players/css/style.css" />
+<script type="text/javascript" src="widgets/players/js/players.js"></script>
 
+<script id="tplWinampPlayer"
+        type="text/ejs"
+        class="vis-tpl"
+        data-vis-prev='<img style="width:112px; height:52px" src="widgets/players/img/winamp.png"></img>'
+        data-vis-attrs="oid_play/id/onPlayWinampChanged;oid_next/id;oid_prev/id;oid_stop/id;oid_pause/id;oid_seek/id;oid_vol/id;oid_mute/id;oid_shuffle/id;oid_repeat/id;oid_artist/id;oid_title/id;oid_album/id;oid_bitrate/id;"
+        data-vis-set="players"
+        data-vis-type="val"
+        data-vis-beta="true"
+        data-vis-name="Winamp Player">
+    <div class="vis-widget <%== this.data.attr('class') %>" style="width:354px; height:161px" id="<%= this.data.attr('wid') %>" data-vis-resizable='{"disabled":true, "handles":"e"}'>
+    <map id="consoleMap" name="consoleMap">
+        <area class="winamp-btn" data-id="repeat"   shape="circle" coords="323,47,9"   alt="Toggle Repeat">
+        <area class="winamp-btn" data-id="shuffle"  shape="circle" coords="324,71,9"   alt="Toggle Shuffle">
+        <area class="winamp-btn" data-id="playlist" shape="circle" coords="304,99,11"  alt="Toggle Playlist">
+        <area class="winamp-btn" data-id="library"  shape="circle" coords="329,99,11"  alt="Toggle dia Library">
+        <area class="winamp-btn" data-id="mute"     shape="circle" coords="171,129,7"  alt="Toggle Mute">
+        <area class="winamp-btn" data-id="prev"     shape="circle" coords="19,124,11"  alt="Previous Track">
+        <area class="winamp-btn" data-id="next"     shape="circle" coords="138,124,11" alt="Next Track">
+        <area class="winamp-btn" data-id="stop"     shape="circle" coords="108,125,11" alt="Stop">
+        <area class="winamp-btn" data-id="pause"    shape="circle" coords="78,125,11"  alt="Pause">
+        <area class="winamp-btn" data-id="play"     shape="circle" coords="48,125,11"  alt="Play">
+    </map>
+    <div class="winamp">
+        <div class="winamp-head">
+            <img class="winamp-head_r" src="widgets/players/img/winamp/waBoxTitleRight.gif">
+            <img class="winamp-head_l" src="widgets/players/img/winamp/waBoxTitleLeft.gif">
+            <div class="winamp-head_c">
+                <img class="winamp-head_c-bg" src="widgets/players/img/winamp/waBoxBg.gif">
+                <img class="winamp-head_c-img" src="widgets/players/img/winamp/waConsoleTitle.gif">
+            </div>
+        </div>
+        <div class="winamp-body">
+            <img src="widgets/players/img/winamp/console.gif" usemap="#consoleMap" width="354" height="144" border="0">
+            <img class="winamp-repeat" src="widgets/players/img/winamp/waLightOn.gif" border="0" >
+            <img class="winamp-shuffle" src="widgets/players/img/winamp/waLightOn.gif" border="0" >
+            <div class="winamp-vol">
+                <div class="winamp-vol-slider"></div>
+                <span class="volume"></span>
+            </div>
+            <div class="winamp-seek">
+                <div class="winamp-seek-slider"></div>
+                <span class="seek"></span>
+            </div>
+            <div class="winamp-artist">Artist: </div>
+            <div class="winamp-title">Title: </div>
+            <div class="winamp-album">Album: </div>
+            <div class="winamp-bitrate">kbps: </div>
+        </div>
+    </div>
+       <% vis.binds.players.createWidgetWinampPlayer(this.data.wid, this.view, this.data, this.style); %>
+	</div>
+</script>
+
+<script id="tplWinampPlaylist"
+        type="text/ejs"
+        class="vis-tpl"
+        data-vis-prev='<img style="width:112px; height:52px" src="widgets/players/img/winamp_plst.png"></img>'
+        data-vis-attrs="oid_playlist/id/onWinampPlaylistChanged;oid_playid/id;oid_track/id;oid_clear/id;"
+        data-vis-set="players"
+        data-vis-type="val"
+        data-vis-beta="true"
+        data-vis-name="Winamp Playlist">
+    <div class="vis-widget <%== this.data.attr('class') %>" style="width:354px; height:161px" id="<%= this.data.attr('wid') %>" >
+            <div class="win-plst-head">
+                <img class="winamp-head_r" src="widgets/players/img/winamp/waBoxTitleRight.gif">
+                <img class="winamp-head_l" src="widgets/players/img/winamp/waBoxTitleLeft.gif">
+                <img class="winamp-plst-close" src="widgets/players/img/winamp/closeBox.gif">
+                <div class="winamp-head_c">
+                    <img class="winamp-head_c-bg" src="widgets/players/img/winamp/waBoxBg.gif">
+                    <img class="winamp-head_c-img" src="widgets/players/img/winamp/waPlaylistTitle.gif">
+                </div>
+            </div>
+            <div class="win-plst-body">
+                <div class="winamp-playlist">
+                    <ul class="winamp-playlist-container">
+                    </ul>
+                </div>
+            </div>
+            <div class="win-plst-footer">
+                <img class="win-plst-footer-resize" src="widgets/players/img/winamp/waResize.gif">
+                <img class="win-plst-footer-l" src="widgets/players/img/winamp/waFooterLeft.gif">
+                <div class="win-plst-footer-b">
+                    <img class="win-plst-footer-bg" src="widgets/players/img/winamp/waFooterBg.gif">
+                    <img class="win-plst-btn-clear" src="widgets/players/img/winamp/plclear.gif">
+                </div>
+            </div>
+
+    <% vis.binds.players.createWidgetWinampPlaylist(this.data.wid, this.view, this.data, this.style); %>
+	</div>
+</script>
+
+<script id="tplWinampBrowser"
+        type="text/ejs"
+        class="vis-tpl"
+        data-vis-prev='<img style="width:112px; height:52px" src="widgets/players/img/winamp_plst.png"></img>'
+        data-vis-attrs="oid_browser/id/onWinampBrowserChanged;oid_add/id;oid_layer/id/onWinampLayerChanged;oid_command/id/onWinampCommandChanged;"
+        data-vis-set="players"
+        data-vis-type="val"
+        data-vis-beta="true"
+        data-vis-name="Winamp Browser">
+    <div class="vis-widget <%== this.data.attr('class') %>" style="width:354px; height:161px" id="<%= this.data.attr('wid') %>" >
+            <div class="win-browser-head">
+                <img class="winamp-head_r" src="widgets/players/img/winamp/waBoxTitleRight.gif">
+                <img class="winamp-head_l" src="widgets/players/img/winamp/waBoxTitleLeft.gif">
+                <img class="winamp-brwsr-close" src="widgets/players/img/winamp/closeBox.gif">
+                <div class="winamp-head_c">
+                    <img class="winamp-head_c-bg" src="widgets/players/img/winamp/waBoxBg.gif">
+                    <img class="winamp-head_c-img" src="widgets/players/img/winamp/titleML.gif">
+                </div>
+            </div>
+            <div class="win-plst-body">
+                <div class="medialibrary">
+                    <table class="mlTable">
+                        <tbody>
+                        <tr>
+                            <td class="mlHead">Name<img border="0" src="widgets/players/img/winamp/asc.gif"></td>
+                            <!--<td class="mlHead">Date</td>-->
+                            <!--<td class="mlHead">Size</td>-->
+                        </tr>
+                        <tr class="mlChoice">
+                            <td class="mlChoice">
+                                <span class="mlItem">..</span>
+                                <div class="winamp-browser">
+                                    <ul class="browser-container"></ul>
+                                </div>
+                            </td>
+					    </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--<div class="medialibrary-loading">
+                    <img src="widgets/players/img/winamp/loading.gif">
+                </div>-->
+            </div>
+            <div class="win-plst-footer"">
+                <img class="winamp-head_r" src="widgets/players/img/winamp/waResize.gif">
+                <img class="winamp-head_l" src="widgets/players/img/winamp/waFooterLeft.gif">
+                <div class="win-plst-footer-b">
+                    <img class="win-plst-footer-bg" src="widgets/players/img/winamp/waFooterBg.gif">
+                    <img class="browser-btn-add" src="widgets/players/img/winamp/add.gif">
+                </div>
+            </div>
+
+
+    <% vis.binds.players.createWidgetWinampBrowser(this.data.wid, this.view, this.data, this.style); %>
+	</div>
+</script>
+
+<script id="tplSonosMobilePlayer"
+        type="text/ejs"
+        class="vis-tpl"
+        data-vis-prev='<img style="width:112px; height:52px" src="widgets/players/img/sonos.png"></img>'
+        data-vis-attrs="oid_play/id/onPlaySonosChanged;oid_state/id;oid_next/id;oid_prev/id;oid_pause/id;oid_vol/id;oid_artist/id;oid_title/id;oid_album/id;oid_cover/id;oid_next_title/id;text_next;"
+        data-vis-set="players"
+        data-vis-beta="true"
+        data-vis-update-style="true"
+        data-vis-name="Sonos Player">
+    <div class="vis-widget sonos-body sonos-landscape <%== this.data.attr('class') %>" style="width: 354px; height: 161px; background: black" id="<%= this.data.attr('wid') %>">
+        <div class="sonos-status-container">
+            <img class="sonos-current-track-art" />
+            <div class="sonos-current-track-info">
+                <div>
+                    <p class="sonos-track"></p>
+                    <p class="sonos-artist"></p>
+                    <p class="sonos-album"></p>
+                </div>
+                <p class="sonos-next-track"><span class="sonos-next-track-title"></span> <span class="sonos-next-track-text"></span></p>
+                <div class="sonos-controls">
+                    <img class="sonos-button" data-control="prev"  src="widgets/players/img/sonos/prev.svg">
+                    <img class="sonos-button" data-control="play"  src="widgets/players/img/sonos/play.svg">
+                    <img class="sonos-button" data-control="pause" src="widgets/players/img/sonos/pause.svg" style="display: none">
+                    <img class="sonos-button" data-control="next"  src="widgets/players/img/sonos/next.svg">
+                    <div class="sonos-master-volume"></div>
+                </div>
+            </div>
+        </div>
+	</div>
+    <% vis.binds.players.createWidgetSonosPlayer(this.data.wid, this.view, this.data, this.style); %>
+</script>
