@@ -1,0 +1,68 @@
+<!--
+    ioBroker.vis template Widget-Set
+
+    version: "0.0.1"
+
+    Copyright 10.2015-2016 @@Author@@<@@email@@>
+-->
+<!-- here you can include so many css as you want -->
+<link rel="stylesheet" href="widgets/template/css/style.css" />
+<!-- here you can include so many js-files as you want -->
+<script type="text/javascript" src="widgets/template/js/template.js"></script>
+
+<script id="tplTemplateOnkyoPlayer"
+        type="text/ejs"
+        class="vis-tpl"
+        data-vis-prev='<img style="width:112px; height:52px" src="widgets/template/img/sonos.png"></img>'
+        data-vis-attrs="oid_browser/id/onWinampBrowserChanged;oid_layer/id;oid_command/id;oid_play/id/onPlaySonosChanged;oid_state/id;oid_next/id;oid_prev/id;oid_pause/id;oid_vol/id;oid_artist/id;oid_title/id;oid_album/id;oid_cover/id;oid_next_title/id;oid_text_next/id;oid_timeinfo/id;"
+        data-vis-set="template"
+        data-vis-type="val"
+        data-vis-beta="true"
+        data-vis-name="OnkyoPlayer">
+	<div class="vis-widget <%== this.data.attr('class') %>" style="width:380px; height:534px; background: black" id="<%= this.data.attr('wid') %>" >
+		<div class="PlayerContainer">
+			<div class="track-art">
+			<img class="player-track-art" />
+			</div>
+			<div class="track-info">
+				<div class="track-details">
+					<p style="color:white; overflow: hidden"><span>Titel: </span><span class="track" style="font-weight: bold"></span></p>
+					<p style="color:white; overflow: hidden"><span>Artist: </span><span class="artist"></span></p>
+					<p style="color:white"><span>Album: </span><span class="album"></span></p>
+					<p style="color:white"><span>Time-Info: </span><span class="timeinfo"></span></p>
+				</div>
+				<div class="player-controls">
+					<img class="button" data-control="prev"  src="widgets/template/img/sonos/media-skip-backward-8.png">
+					<img class="button" data-control="play"  src="widgets/template/img/sonos/media-playback-start-8.png">
+					<img class="button" data-control="pause" src="widgets/template/img/sonos/media-playback-pause-8.png" style="display: none">
+					<img class="button" data-control="stop" src="widgets/template/img/sonos/media-playback-stop-8.png">
+					<img class="button" data-control="next"  src="widgets/template/img/sonos/media-skip-forward-8.png">
+				</div>
+			</div>	
+		</div>	
+		<div class="BrowserPlaylistButtonContainer">
+		
+		</div>
+		<div class="browsercontainer">
+			<div>
+                    <table class="mlTable">
+                        <tbody>
+                        <tr>
+                            <td class="mlHead">Name<img border="0" src="widgets/players/img/winamp/asc.gif"></td>
+                        </tr>
+                        <tr class="mlChoice">
+                            <td class="mlChoice">
+                                <span class="mlItem">..</span>
+                                <div class="onkyo-browser">
+                                    <ul class="browser-container"></ul>
+                                </div>
+                            </td>
+					    </tr>
+                        </tbody>
+                    </table>
+            </div>
+
+		</div>
+	<% vis.binds.template.createWidgetPlayer(this.data.wid, this.view, this.data, this.style); %>
+	</div>
+</script>
